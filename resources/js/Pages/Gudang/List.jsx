@@ -8,18 +8,18 @@ const List = () => {
         <div>
            <table className="table-auto w-full border">
                 <thead>
-                <tr className="bg-gray-100">
-                    <th className="border px-4 py-2">Nama</th>
-                    <th className="border px-4 py-2">Stok</th>
-                </tr>
+                    <tr className="bg-gray-100">
+                        <th className="border px-4 py-2">Nama</th>
+                        <th className="border px-4 py-2">Stok</th>
+                    </tr>
                 </thead>
                 <tbody>
-                {daftarGudang.map((gudang, index) => (
-                    <tr key={index} className="hover:bg-gray-50">
-                    <td className="border px-4 py-2">{gudang.nama}</td>
-                    <td className="border px-4 py-2">{gudang.kuantitas}</td>
-                    </tr>
-                ))}
+                    {daftarGudang.map((gudang, index) => (
+                        <tr key={index} className="hover:bg-gray-50">
+                            <td className="border px-4 py-2">{gudang.nama}</td>
+                            <td className="border px-4 py-2">{gudang.kuantitas}</td>
+                        </tr>
+                    ))}
                 </tbody>
             </table>
         </div>

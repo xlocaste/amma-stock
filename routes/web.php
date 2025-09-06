@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\GudangController;
+use App\Http\Controllers\MenuController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -28,6 +29,12 @@ Route::middleware('auth')->group(function () {
 Route::prefix('/gudang')->name('gudang.')->group(function() {
     Route::group(['middleware' => ['auth']], function() {
         Route::get('/', [GudangController::class, 'index'])->name('index');
+    });
+});
+
+Route::prefix('/menu')->name('menu.')->group(function() {
+    Route::group(['middleware' => ['auth']], function() {
+        Route::get('/', [MenuController::class, 'index'])->name('index');
     });
 });
 

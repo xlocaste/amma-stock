@@ -15,4 +15,9 @@ class Gudang extends Model
         'nama',
         'kuantitas',
     ];
+
+    public function menu()
+    {
+        return $this->belongsToMany(Menu::class, 'menu_gudang')->withPivot('jumlah_bahan')->withTimestamps();
+    }
 }

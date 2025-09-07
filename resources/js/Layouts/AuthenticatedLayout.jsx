@@ -53,6 +53,12 @@ export default function AuthenticatedLayout({ header, children }) {
                         >
                             Gudang
                         </NavLink>
+                        <NavLink
+                            href={route('menu.index')}
+                            active={route().current('menu.index')}
+                        >
+                            Menu
+                        </NavLink>
                     </nav>
                 </div>
 

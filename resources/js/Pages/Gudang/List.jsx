@@ -26,6 +26,7 @@ const List = () => {
                         <tr className="">
                             <th className="border px-4 py-2">Nama</th>
                             <th className="border px-4 py-2">Stok</th>
+                            <th className="border px-4 py-2">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -33,6 +34,11 @@ const List = () => {
                             <tr key={index} className="hover:bg-gray-50">
                                 <td className="border px-4 py-2">{gudang.nama}</td>
                                 <td className="border px-4 py-2">{gudang.kuantitas}</td>
+                                <td className="border px-4 py-2 text-center">
+                                    <Link href={route('gudang.edit', gudang.id)}>
+                                        <PrimaryButton>Edit</PrimaryButton>
+                                    </Link>
+                                </td>
                             </tr>
                         ))}
                     </tbody>

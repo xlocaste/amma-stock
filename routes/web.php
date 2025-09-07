@@ -30,6 +30,8 @@ Route::prefix('/gudang')->name('gudang.')->group(function() {
     Route::group(['middleware' => ['auth']], function() {
         Route::get('/', [GudangController::class, 'index'])->name('index');
         Route::get('/create', [GudangController::class, 'create'])->name('create');
+        Route::get('/{gudang}', [GudangController::class, 'edit'])->name('edit');
+        Route::put('/{gudang}', [GudangController::class, 'update'])->name('update');
         Route::post('/', [GudangController::class, 'store'])->name('store');
     });
 });

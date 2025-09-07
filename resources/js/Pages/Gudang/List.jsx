@@ -1,10 +1,16 @@
 import PrimaryButton from '@/Components/PrimaryButton'
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout'
-import { Link, usePage } from '@inertiajs/react'
+import { Link, router, usePage } from '@inertiajs/react'
 import React from 'react'
 
 const List = () => {
     const { daftarGudang } = usePage().props
+
+    const handleDelete = (id) => {
+        if (confirm('Yakin ingin menghapus data ini?')) {
+        router.delete(route('gudang.destroy', id));
+        }
+    };
 
     return (
         <AuthenticatedLayout
@@ -34,10 +40,16 @@ const List = () => {
                             <tr key={index} className="hover:bg-gray-50">
                                 <td className="border px-4 py-2">{gudang.nama}</td>
                                 <td className="border px-4 py-2">{gudang.kuantitas}</td>
-                                <td className="border px-4 py-2 text-center">
+                                <td className="border px-4 py-2 space-x-2 text-center">
                                     <Link href={route('gudang.edit', gudang.id)}>
                                         <PrimaryButton>Edit</PrimaryButton>
                                     </Link>
+                                    <PrimaryButton
+                                        className="bg-red-600 hover:bg-red-700"
+                                        onClick={() => handleDelete(gudang.id)}
+                                    >
+                                        Hapus
+                                    </PrimaryButton>
                                 </td>
                             </tr>
                         ))}

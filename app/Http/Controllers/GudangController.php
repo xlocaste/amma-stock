@@ -50,4 +50,11 @@ class GudangController extends Controller
             'gudang' => $gudang
         ]);
     }
+
+    public function destroy(Gudang $gudang)
+    {
+        $gudang->delete();
+
+        return redirect()->route('gudang.index');
+    }
 }

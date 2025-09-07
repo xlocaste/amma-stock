@@ -32,6 +32,7 @@ Route::prefix('/gudang')->name('gudang.')->group(function() {
         Route::get('/create', [GudangController::class, 'create'])->name('create');
         Route::get('/{gudang}', [GudangController::class, 'edit'])->name('edit');
         Route::put('/{gudang}', [GudangController::class, 'update'])->name('update');
+        Route::delete('/{gudang}', [GudangController::class, 'destroy'])->name('destroy');
         Route::post('/', [GudangController::class, 'store'])->name('store');
     });
 });

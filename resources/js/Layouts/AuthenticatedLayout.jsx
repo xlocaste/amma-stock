@@ -40,12 +40,18 @@ export default function AuthenticatedLayout({ header, children }) {
                 </div>
 
                 <div className="px-4 py-6">
-                    <nav className="space-y-2">
+                    <nav className="space-y-2 flex flex-col">
                         <NavLink
                             href={route('dashboard')}
                             active={route().current('dashboard')}
                         >
                             Dashboard
+                        </NavLink>
+                        <NavLink
+                            href={route('gudang.index')}
+                            active={route().current('gudang.index')}
+                        >
+                            Gudang
                         </NavLink>
                     </nav>
                 </div>

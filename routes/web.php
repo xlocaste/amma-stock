@@ -40,6 +40,8 @@ Route::prefix('/gudang')->name('gudang.')->group(function() {
 Route::prefix('/menu')->name('menu.')->group(function() {
     Route::group(['middleware' => ['auth']], function() {
         Route::get('/', [MenuController::class, 'index'])->name('index');
+        Route::get('/create', [MenuController::class, 'create'])->name('create');
+        Route::post('/', [MenuController::class, 'store'])->name('store');
     });
 });
 

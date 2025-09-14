@@ -14,6 +14,7 @@ class Menu extends Model
     protected $fillable = [
         'nama',
         'harga',
+        'deskripsi',
     ];
 
     public function gudang()

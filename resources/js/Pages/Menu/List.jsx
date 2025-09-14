@@ -1,5 +1,6 @@
+import PrimaryButton from '@/Components/PrimaryButton'
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout'
-import { usePage } from '@inertiajs/react'
+import { Link, usePage } from '@inertiajs/react'
 import React from 'react'
 
 const List = () => {
@@ -13,6 +14,12 @@ const List = () => {
                 </h2>
             }
         >
+            <div className="flex justify-end mb-4">
+                <Link href={route('menu.create')}>
+                    <PrimaryButton>+ Tambah Menu</PrimaryButton>
+                </Link>
+            </div>
+
             <div className='bg-white rounded-lg p-6'>
                 <table className="table-auto w-full border">
                     <thead>

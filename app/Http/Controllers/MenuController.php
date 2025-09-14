@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Menu\StoreRequest;
 use App\Http\Requests\Menu\UpdateRequest;
+use App\Models\Gudang;
 use App\Models\Menu;
 use Inertia\Inertia;
 
@@ -11,7 +12,7 @@ class MenuController extends Controller
 {
     public function index()
     {
-        $daftarMenu = Menu::all();
+        $daftarMenu = Menu::with('gudang')->get();
 
         return Inertia::render('Menu/List', [
             'daftarMenu' => $daftarMenu,
@@ -20,18 +21,33 @@ class MenuController extends Controller
 
     public function store(StoreRequest $request)
     {
-        Menu::create([
+        $menu = Menu::create([
             'nama'=>$request->nama,
             'harga'=>$request->harga,
             'deskripsi'=>$request->deskripsi,
         ]);
+
+        if ($request->filled('bahan')) {
+            $pivotData = collect($request->bahan)
+                ->filter(fn ($item) => $item['gudang_id'] && $item['jumlah_bahan'])
+                ->mapWithKeys(function ($item) {
+                    return [$item['gudang_id'] => ['jumlah_bahan' => $item['jumlah_bahan']]];
+                })
+                ->toArray();
+
+            $menu->gudang()->attach($pivotData);
+        }
 
         return redirect()->route('menu.index');
     }
 
     public function create()
     {
-        return Inertia::render('Menu/Add');
+        $gudang = Gudang::select('id','nama')->get();
+
+        return Inertia::render('Menu/Add', [
+            'gudang' => $gudang,
+        ]);
     }
 
     public function update(UpdateRequest $request, Menu $menu)

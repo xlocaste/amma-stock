@@ -2,16 +2,35 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { useForm } from '@inertiajs/react';
 import React from 'react';
 
-const Add = () => {
+const Add = ({ gudang }) => {
     const { data, setData, post, processing, errors } = useForm({
         nama: '',
         harga: '',
         deskripsi: '',
+        bahan: [
+            { gudang_id: '', jumlah_bahan: '' },
+        ],
     });
 
     const handleSubmit = (e) => {
         e.preventDefault();
         post(route('menu.store'));
+    };
+
+    const handleAddBahan = () => {
+        setData('bahan', [...data.bahan, { gudang_id: '', jumlah_bahan: '' }]);
+    };
+
+    const handleRemoveBahan = (index) => {
+        const newBahan = [...data.bahan];
+        newBahan.splice(index, 1);
+        setData('bahan', newBahan);
+    };
+
+    const handleChangeBahan = (index, field, value) => {
+        const newBahan = [...data.bahan];
+        newBahan[index][field] = value;
+        setData('bahan', newBahan);
     };
 
     return (
@@ -76,6 +95,57 @@ const Add = () => {
                             )}
                         </div>
 
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700 mb-2">
+                                Bahan dari Gudang
+                            </label>
+
+                            {data.bahan.map((item, index) => (
+                                <div key={index} className="grid grid-cols-5 gap-2 mb-2">
+                                    <div className="col-span-3">
+                                        <select
+                                            value={item.gudang_id}
+                                            onChange={(e) => handleChangeBahan(index, 'gudang_id', e.target.value)}
+                                            className="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
+                                        >
+                                            <option value="">-- Pilih Gudang --</option>
+                                            {gudang.map((g) => (
+                                                <option key={g.id} value={g.id}>
+                                                    {g.nama}
+                                                </option>
+                                            ))}
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <input
+                                            type="number"
+                                            placeholder="Jumlah"
+                                            value={item.jumlah_bahan}
+                                            onChange={(e) => handleChangeBahan(index, 'jumlah_bahan', e.target.value)}
+                                            className="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
+                                        />
+                                    </div>
+                                    <div>
+                                        <button
+                                            type="button"
+                                            onClick={() => handleRemoveBahan(index)}
+                                            className="px-2 py-1 bg-red-500 text-white rounded"
+                                        >
+                                            Hapus
+                                        </button>
+                                    </div>
+                                </div>
+                            ))}
+
+                            <button
+                                type="button"
+                                onClick={handleAddBahan}
+                                className="mt-2 px-3 py-1 bg-green-500 text-white rounded"
+                            >
+                                + Tambah Bahan
+                            </button>
+                        </div>
+
                         <div className="flex justify-end">
                             <button
                                 type="submit"
@@ -85,6 +155,7 @@ const Add = () => {
                                 {processing ? 'Menyimpan...' : 'Simpan'}
                             </button>
                         </div>
+
                     </form>
                 </div>
             </div>

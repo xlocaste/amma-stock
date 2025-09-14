@@ -1,10 +1,16 @@
 import PrimaryButton from '@/Components/PrimaryButton'
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout'
-import { Link, usePage } from '@inertiajs/react'
+import { Link, router, usePage } from '@inertiajs/react'
 import React from 'react'
 
 const List = () => {
     const { daftarMenu } = usePage().props
+
+    const handleDelete = (id) => {
+        if (confirm('Yakin ingin menghapus data ini?')) {
+        router.delete(route('menu.destroy', id));
+        }
+    };
 
     return (
         <AuthenticatedLayout

@@ -51,4 +51,11 @@ class MenuController extends Controller
             'menu' => $menu,
         ]);
     }
+
+    public function destroy(Menu $menu)
+    {
+        $menu->delete();
+
+        return redirect()->route('menu.index');
+    }
 }

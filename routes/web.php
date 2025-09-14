@@ -43,6 +43,7 @@ Route::prefix('/menu')->name('menu.')->group(function() {
         Route::get('/create', [MenuController::class, 'create'])->name('create');
         Route::get('/{menu}', [MenuController::class, 'edit'])->name('edit');
         Route::put('/{menu}', [MenuController::class, 'update'])->name('update');
+        Route::delete('/{menu}', [MenuController::class, 'destroy'])->name('destroy');
         Route::post('/', [MenuController::class, 'store'])->name('store');
     });
 });

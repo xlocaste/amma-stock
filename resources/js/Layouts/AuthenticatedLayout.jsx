@@ -59,6 +59,12 @@ export default function AuthenticatedLayout({ header, children }) {
                         >
                             Menu
                         </NavLink>
+                        <NavLink
+                            href={route('kasir.index')}
+                            active={route().current('kasir.index')}
+                        >
+                            Kasir
+                        </NavLink>
                     </nav>
                 </div>
 

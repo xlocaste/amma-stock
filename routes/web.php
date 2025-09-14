@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\GudangController;
+use App\Http\Controllers\KasirController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
@@ -45,6 +46,12 @@ Route::prefix('/menu')->name('menu.')->group(function() {
         Route::put('/{menu}', [MenuController::class, 'update'])->name('update');
         Route::delete('/{menu}', [MenuController::class, 'destroy'])->name('destroy');
         Route::post('/', [MenuController::class, 'store'])->name('store');
+    });
+});
+
+Route::prefix('/kasir')->name('kasir.')->group(function() {
+    Route::group(['middleware' => ['auth']], function() {
+        Route::get('/', [KasirController::class, 'index'])->name('index');
     });
 });
 

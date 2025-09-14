@@ -52,6 +52,7 @@ Route::prefix('/menu')->name('menu.')->group(function() {
 Route::prefix('/kasir')->name('kasir.')->group(function() {
     Route::group(['middleware' => ['auth']], function() {
         Route::get('/', [KasirController::class, 'index'])->name('index');
+        Route::post('/', [KasirController::class, 'store'])->name('store');
     });
 });
 

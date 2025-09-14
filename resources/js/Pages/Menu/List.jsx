@@ -35,6 +35,17 @@ const List = () => {
                                 <td className="border px-4 py-2">{menu.nama}</td>
                                 <td className="border px-4 py-2">{menu.harga}</td>
                                 <td className="border px-4 py-2">{menu.deskripsi}</td>
+                                <td className="border px-4 py-2 space-x-2 text-center">
+                                    <Link href={route('menu.edit', menu.id)}>
+                                        <PrimaryButton>Edit</PrimaryButton>
+                                    </Link>
+                                    <PrimaryButton
+                                        className="bg-red-600 hover:bg-red-700"
+                                        onClick={() => handleDelete(menu.id)}
+                                    >
+                                        Hapus
+                                    </PrimaryButton>
+                                </td>
                             </tr>
                         ))}
                     </tbody>

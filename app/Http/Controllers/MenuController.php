@@ -58,13 +58,26 @@ class MenuController extends Controller
             'deskripsi'=>$request->deskripsi,
         ]);
 
+        $pivotData = [];
+        foreach ($request->bahan as $bahan) {
+            if ($bahan['gudang_id']) {
+                $pivotData[$bahan['gudang_id']] = ['jumlah_bahan' => $bahan['jumlah_bahan']];
+            }
+        }
+        $menu->gudang()->sync($pivotData);
+
         return redirect()->route('menu.index');
     }
 
     public function edit(Menu $menu)
     {
+        $menu->load('gudang');
+
+        $gudang = Gudang::select('id','nama')->get();
+
         return Inertia::render('Menu/Update', [
             'menu' => $menu,
+            'gudang' => $gudang,
         ]);
     }
 

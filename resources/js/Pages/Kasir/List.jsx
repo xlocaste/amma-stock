@@ -30,7 +30,7 @@ const List = () => {
     };
 
   return (
-    <AuthenticatedLayout header={<h2 className="text-xl font-semibold leading-tight text-gray-800">Menu</h2>}>
+    <AuthenticatedLayout header={<h2 className="text-xl font-semibold leading-tight text-gray-800">Kasir</h2>}>
       <div className="max-w-7xl mx-auto py-8 px-4">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {/* Kiri daftar menu */}

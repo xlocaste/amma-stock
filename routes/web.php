@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\GudangController;
 use App\Http\Controllers\KasirController;
+use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
@@ -53,6 +54,12 @@ Route::prefix('/kasir')->name('kasir.')->group(function() {
     Route::group(['middleware' => ['auth']], function() {
         Route::get('/', [KasirController::class, 'index'])->name('index');
         Route::post('/', [KasirController::class, 'store'])->name('store');
+    });
+});
+
+Route::prefix('/laporan')->name('laporan.')->group(function() {
+    Route::group(['middleware' => ['auth']], function() {
+        Route::get('/', [LaporanController::class, 'index'])->name('index');
     });
 });
 

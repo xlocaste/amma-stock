@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Laporan;
 use App\Models\Menu;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -41,6 +43,13 @@ class KasirController extends Controller
                 $gudang->kuantitas = max(0, $gudang->kuantitas - $totalDipakai);
                 $gudang->save();
             }
+
+            Laporan::create([
+                'menu_id' => $menu->id,
+                'qty' => $item['qty'],
+                'total_harga' => $menu->harga * $item['qty'],
+                'tanggal' => Carbon::today(),
+            ]);
         }
 
         return back()->with('success', 'Pesanan berhasil diproses dan stok gudang diperbarui.');

@@ -65,6 +65,12 @@ export default function AuthenticatedLayout({ header, children }) {
                         >
                             Kasir
                         </NavLink>
+                        <NavLink
+                            href={route('laporan.index')}
+                            active={route().current('laporan.index')}
+                        >
+                            Kasir
+                        </NavLink>
                     </nav>
                 </div>
 

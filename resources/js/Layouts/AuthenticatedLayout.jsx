@@ -69,7 +69,7 @@ export default function AuthenticatedLayout({ header, children }) {
                             href={route('laporan.index')}
                             active={route().current('laporan.index')}
                         >
-                            Kasir
+                            Laporan
                         </NavLink>
                     </nav>
                 </div>

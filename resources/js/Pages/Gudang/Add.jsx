@@ -1,12 +1,16 @@
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import { useForm } from '@inertiajs/react';
-import React from 'react'
+import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
+import { Head, useForm, Link } from "@inertiajs/react";
+import InputError from "@/Components/InputError";
+import InputLabel from "@/Components/InputLabel";
+import PrimaryButton from "@/Components/PrimaryButton";
+import TextInput from "@/Components/TextInput";
+import { ArrowLeftIcon } from "@heroicons/react/24/outline";
 
 const Add = () => {
     const { data, setData, post, processing, errors } = useForm({
         nama: "",
         kuantitas: "",
-    })
+    });
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -16,62 +20,94 @@ const Add = () => {
     return (
         <AuthenticatedLayout
             header={
-                <h2 className="text-xl font-semibold leading-tight text-gray-800">
-                    Gudang
-                </h2>
+                <div className="flex items-center gap-4">
+                    <Link
+                        href={route("gudang.index")}
+                        className="text-gray-500 hover:text-gray-700 transition-colors"
+                    >
+                        <ArrowLeftIcon className="h-5 w-5" />
+                    </Link>
+                    <h2 className="text-xl font-semibold leading-tight text-gray-800">
+                        Tambah Barang Baru
+                    </h2>
+                </div>
             }
         >
-            <div className="max-w-3xl mx-auto py-8">
-                <div className="bg-white shadow-md rounded-lg p-6">
-                    <form onSubmit={handleSubmit} className="space-y-6">
-                        <div>
-                            <label htmlFor="nama" className="block text-sm font-medium text-gray-700">
-                                Nama Gudang
-                            </label>
-                            <input
-                                type="text"
-                                id="nama"
-                                name="nama"
-                                value={data.nama}
-                                onChange={(e) => setData("nama", e.target.value)}
-                                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
-                            />
-                            {errors.nama && (
-                                <p className="mt-1 text-sm text-red-600">{errors.nama}</p>
-                            )}
-                        </div>
+            <Head title="Tambah Barang - Amma Coffe" />
 
-                        <div>
-                            <label htmlFor="kuantitas" className="block text-sm font-medium text-gray-700">
-                                Kuantitas
-                            </label>
-                            <input
-                                type="number"
-                                id="kuantitas"
-                                name="kuantitas"
-                                value={data.kuantitas}
-                                onChange={(e) => setData("kuantitas", e.target.value)}
-                                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
-                            />
-                            {errors.kuantitas && (
-                                <p className="mt-1 text-sm text-red-600">{errors.kuantitas}</p>
-                            )}
-                        </div>
+            <div className="py-8">
+                <div className="max-w-2xl mx-auto sm:px-6 lg:px-8">
+                    <div className="bg-white shadow-sm rounded-lg p-6">
+                        <form onSubmit={handleSubmit} className="space-y-6">
+                            <div>
+                                <InputLabel
+                                    htmlFor="nama"
+                                    value="Nama Barang"
+                                />
 
-                        <div className="flex justify-end">
-                            <button
-                                type="submit"
-                                disabled={processing}
-                                className="inline-flex items-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-500 active:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-                            >
-                                {processing ? "Menyimpan..." : "Simpan"}
-                            </button>
-                        </div>
-                    </form>
+                                <TextInput
+                                    id="nama"
+                                    name="nama"
+                                    value={data.nama}
+                                    className="mt-1 block w-full"
+                                    autoComplete="nama"
+                                    isFocused={true}
+                                    onChange={(e) =>
+                                        setData("nama", e.target.value)
+                                    }
+                                    required
+                                />
+
+                                <InputError
+                                    message={errors.nama}
+                                    className="mt-2"
+                                />
+                            </div>
+
+                            <div>
+                                <InputLabel
+                                    htmlFor="kuantitas"
+                                    value="Kuantitas Stok"
+                                />
+
+                                <TextInput
+                                    id="kuantitas"
+                                    name="kuantitas"
+                                    type="number"
+                                    value={data.kuantitas}
+                                    className="mt-1 block w-full"
+                                    onChange={(e) =>
+                                        setData("kuantitas", e.target.value)
+                                    }
+                                    required
+                                />
+
+                                <InputError
+                                    message={errors.kuantitas}
+                                    className="mt-2"
+                                />
+                            </div>
+
+                            <div className="flex justify-end space-x-3 pt-4">
+                                <Link
+                                    href={route("gudang.index")}
+                                    className="inline-flex items-center px-4 py-2 bg-gray-200 border border-transparent rounded-md font-semibold text-xs text-gray-800 uppercase tracking-widest hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 transition ease-in-out duration-150"
+                                >
+                                    Batal
+                                </Link>
+                                <PrimaryButton
+                                    className="bg-amber-600 hover:bg-amber-700 focus:bg-amber-700"
+                                    disabled={processing}
+                                >
+                                    {processing ? "Menyimpan..." : "Simpan"}
+                                </PrimaryButton>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </AuthenticatedLayout>
-    )
-}
+    );
+};
 
-export default Add
+export default Add;

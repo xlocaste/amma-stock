@@ -1,0 +1,35 @@
+========== Dashboard =========
+[X] Dashboard Page
+
+========== Minor UI ==========
+[X] Components AuthenticatedLayout
+
+====== AUTH PAGE ======
+[X] Welcome Page
+[X] Login Page
+[X] Register Page
+
+===== GUDANG PAGE =====
+[X] ADD Gudang Page
+[X] List Gudang Page
+[X] Update Gudang Page
+
+===== KASIR PAGE ======
+[X] List Kasir Page
+
+===== LAPORAN PAGE ======
+[X] List Laporan Page
+
+===== MENU PAGE =====
+[X] Add Manu Page
+[X] List Menu Page
+[X] Update Menu Page
+
+====== Profile Page ======
+[X] Edit Profile Page
+
+Partials Profile Page {
+[X] updatePasswordForm
+[X] deleteUserForm
+[X] updateProfileInformationForm
+}

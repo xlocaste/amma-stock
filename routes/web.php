@@ -5,6 +5,7 @@ use App\Http\Controllers\KasirController;
 use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\DashboardController; // <-- TAMBAHKAN INI
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -18,9 +19,7 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -28,8 +27,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::prefix('/gudang')->name('gudang.')->group(function() {
-    Route::group(['middleware' => ['auth']], function() {
+Route::prefix('/gudang')->name('gudang.')->group(function () {
+    Route::group(['middleware' => ['auth']], function () {
         Route::get('/', [GudangController::class, 'index'])->name('index');
         Route::get('/create', [GudangController::class, 'create'])->name('create');
         Route::get('/{gudang}', [GudangController::class, 'edit'])->name('edit');
@@ -39,8 +38,8 @@ Route::prefix('/gudang')->name('gudang.')->group(function() {
     });
 });
 
-Route::prefix('/menu')->name('menu.')->group(function() {
-    Route::group(['middleware' => ['auth']], function() {
+Route::prefix('/menu')->name('menu.')->group(function () {
+    Route::group(['middleware' => ['auth']], function () {
         Route::get('/', [MenuController::class, 'index'])->name('index');
         Route::get('/create', [MenuController::class, 'create'])->name('create');
         Route::get('/{menu}', [MenuController::class, 'edit'])->name('edit');
@@ -50,17 +49,17 @@ Route::prefix('/menu')->name('menu.')->group(function() {
     });
 });
 
-Route::prefix('/kasir')->name('kasir.')->group(function() {
-    Route::group(['middleware' => ['auth']], function() {
+Route::prefix('/kasir')->name('kasir.')->group(function () {
+    Route::group(['middleware' => ['auth']], function () {
         Route::get('/', [KasirController::class, 'index'])->name('index');
         Route::post('/', [KasirController::class, 'store'])->name('store');
     });
 });
 
-Route::prefix('/laporan')->name('laporan.')->group(function() {
-    Route::group(['middleware' => ['auth']], function() {
+Route::prefix('/laporan')->name('laporan.')->group(function () {
+    Route::group(['middleware' => ['auth']], function () {
         Route::get('/', [LaporanController::class, 'index'])->name('index');
     });
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

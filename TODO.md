@@ -33,3 +33,9 @@ Partials Profile Page {
 [X] deleteUserForm
 [X] updateProfileInformationForm
 }
+
+[X] Fixing AuthenticatedLayout
+[X] Fixing Login,
+[X] Fixing Register Page
+[X] Fixing Landing Page Page
+[X] Fixing List Laporan Page

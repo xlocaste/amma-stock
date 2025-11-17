@@ -25,7 +25,7 @@ export default function Register() {
         <Guest>
             <Head title="Register - Amma Coffe" />
 
-            <div className="bg-white p-8 shadow-xl rounded-2xl">
+            <div className="bg-white p-8 shadow-xl rounded-2xl my-6">
                 <div className="text-center">
                     <h2 className="mt-2 text-3xl font-bold text-gray-900">
                         Buat Akun Baru
